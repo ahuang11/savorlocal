@@ -1,11 +1,11 @@
 from pathlib import Path
-from typing import List, Iterator, Tuple
+from typing import Iterator, List, Tuple
+
 import pandas as pd
 import streamlit as st
-from snowflake.snowpark import Session, Row
-from snowflake.snowpark.functions import col
 from geopy import Nominatim, distance
-
+from snowflake.snowpark import Row, Session
+from snowflake.snowpark.functions import col
 
 DATABASE = "FREE_COMPANY_DATASET"
 TABLE = "FREECOMPANYDATASET"
@@ -60,6 +60,7 @@ def display_results(rows: Iterator[Row]):
     if count == 0:
         st.warning("No results found!")
 
+
 if "table" not in st.session_state:
     session = Session.builder.configs(
         dict(database=DATABASE, **st.secrets["snowflake"])
@@ -72,7 +73,9 @@ if "geolocator" not in st.session_state:
     st.session_state["geolocator"] = Nominatim(user_agent="savorlocal")
 
 with st.sidebar:
-    st.image("logo.png",)
+    st.image(
+        "logo.png",
+    )
     st.title("Savorlocal")
     address = st.text_input(
         "📍 Address",
