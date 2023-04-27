@@ -73,10 +73,9 @@ if "geolocator" not in st.session_state:
     st.session_state["geolocator"] = Nominatim(user_agent="savorlocal")
 
 with st.sidebar:
-    st.image(
-        "logo.png",
-    )
+    st.image("logo.png", width=95)
     st.title("Savorlocal")
+    st.subheader("Discover small culinary businesses in your local area.")
     address = st.text_input(
         "📍 Address",
         value="98109",
